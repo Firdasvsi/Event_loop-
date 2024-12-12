@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Bar</title>
+    <style>
+        #progress-bar {
+            width: 0;
+            height: 20px;
+            background-color: #4caf50;
+            transition: width 0.1s linear; 
+        }
+        #progress-container {
+            width: 500px;
+            background-color: #f3f3f3;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+        #timer {
+            font-size: 18px;
+            font-family: Arial, sans-serif;
+        }
+        .progress {
+            width: 100%;
+            animation: fillProgress 7s linear forwards;
+        }
+
+        @keyframes fillProgress {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="progress-container">
+    <div id="progress-bar" class="progress"></div>
+</div>
+<div id="timer">0</div>
+
+<script>
+    function progress(time) {
+        const progressBar = document.getElementById("progress-bar");
+        const timer = document.getElementById("timer");
+        
+        progressBar.style.animationDuration = `${time}s`;
+
+        let elapsedTime = 0;
+        const interval = setInterval(() => {
+            elapsedTime++;
+            timer.textContent = `${elapsedTime} С`; 
+            
+            if (elapsedTime >= time) {
+                clearInterval(interval);
+            }
+        }, 1000); 
+    }
+    progress(7);
+</script>
+
+</body>
+</html>

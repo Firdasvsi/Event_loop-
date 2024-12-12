@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async Image Loader</title>
+    <style>
+        img {
+            width: 200px;
+            height: 200px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="cat-images"></div>
+    <div id="dog-images"></div>
+
+    <script>
+        function fetchCatImages() {
+            return new Promise((resolve) => {
+                const delay = Math.random() * (5000 - 2000) + 2000; // от 2 до 5 секунд
+                setTimeout(() => {
+                    resolve([
+                        "/images/2iyyaef2k3e.jpg",
+                        "/images/h-6896.jpg",
+                        "/images/i (1).webp"
+                    ]);
+                }, delay);
+            });
+        }
+
+        function fetchDogImages() {
+            return new Promise((resolve) => {
+                const delay = Math.random() * (5000 - 2000) + 2000; 
+                setTimeout(() => {
+                    resolve([
+                        "/images/100024243154b0.webp",
+                        "/images/orig.webp"
+                    ]);
+                }, delay);
+            });
+        }
+
+        function displayImages(images, containerId) {
+            const container = document.getElementById(containerId);
+            images.forEach((src) => {
+                const img = document.createElement("img");
+                img.src = src;
+                container.appendChild(img);
+            });
+        }
+
+        const catPromise = fetchCatImages();
+        const dogPromise = fetchDogImages();
+
+        Promise.all([catPromise, dogPromise]).then(([catImages, dogImages]) => {
+            if (Math.random() > 0.5) {
+                displayImages(catImages, "cat-images");
+                displayImages(dogImages, "dog-images");
+            } else {
+                displayImages(dogImages, "dog-images");
+                displayImages(catImages, "cat-images");
+            }
+        });
+    </script>
+</body>
+</html>
