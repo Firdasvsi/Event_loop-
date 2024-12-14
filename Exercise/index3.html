@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,8 +41,13 @@
         }
 
         @keyframes fillProgress {
-            from { width: 0; }
-            to { width: 100%; }
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
         }
 
         .progress-bar.animate {
@@ -66,78 +72,80 @@
         }
     </style>
 </head>
+
 <body>
 
-<div class="progress-container" id="task-1">
-    <div class="progress-bar-wrapper">
-        <div class="progress-bar"></div>
+    <div class="progress-container" id="task-1">
+        <div class="progress-bar-wrapper">
+            <div class="progress-bar"></div>
+        </div>
+        <div class="timer">0</div>
+        <div class="image-row" id="images-task-1"></div>
     </div>
-    <div class="timer">0</div>
-    <div class="image-row" id="images-task-1"></div>
-</div>
-<div class="progress-container" id="task-2">
-    <div class="progress-bar-wrapper">
-        <div class="progress-bar"></div>
+    <div class="progress-container" id="task-2">
+        <div class="progress-bar-wrapper">
+            <div class="progress-bar"></div>
+        </div>
+        <div class="timer">0</div>
+        <div class="image-row" id="images-task-2"></div>
     </div>
-    <div class="timer">0</div>
-    <div class="image-row" id="images-task-2"></div>
-</div>
 
-<script>
-    function displayImages(imageRow, imageUrls) {
-        imageRow.innerHTML = '';
-        imageUrls.forEach(url => {
-            const img = document.createElement('img');
-            img.src = url;
-            imageRow.appendChild(img);
-        });
-    }
+    <script>
+        function displayImages(imageRow, imageUrls) {
+            imageRow.innerHTML = '';
+            imageUrls.forEach(url => {
+                const img = document.createElement('img');
+                img.src = url;
+                imageRow.appendChild(img);
+            });
+        }
 
-    function runTasks() {
-        const task1Container = document.getElementById('task-1');
-        const task1ProgressBar = task1Container.querySelector('.progress-bar');
-        const task1Timer = task1Container.querySelector('.timer');
-        const task1ImageRow = task1Container.querySelector('.image-row');
+        function runTasks() {
+            const task1Container = document.getElementById('task-1');
+            const task1ProgressBar = task1Container.querySelector('.progress-bar');
+            const task1Timer = task1Container.querySelector('.timer');
+            const task1ImageRow = task1Container.querySelector('.image-row');
 
-        const task2Container = document.getElementById('task-2');
-        const task2ProgressBar = task2Container.querySelector('.progress-bar');
-        const task2Timer = task2Container.querySelector('.timer');
-        const task2ImageRow = task2Container.querySelector('.image-row');
+            const task2Container = document.getElementById('task-2');
+            const task2ProgressBar = task2Container.querySelector('.progress-bar');
+            const task2Timer = task2Container.querySelector('.timer');
+            const task2ImageRow = task2Container.querySelector('.image-row');
 
-        const task1Images = [
-            '/images/2iyyaef2k3e.jpg',
-            '/images/h-6896.jpg',
-            '/images/i (1).webp'
-        ];
+            const task1Images = [
+                "/Exercise/images/2iyyaef2k3e.jpg",
+                "/Exercise/images/h-6896.jpg",
+                "/Exercise/images/i (1).webp"
+            ];
 
-        const task2Images = [
-            '/images/100024243154b0.webp',
-            '/images/orig.webp'
-        ];
+            const task2Images = [
+                "/Exercise/images/100024243154b0.webp",
+                "/Exercise/images/orig.webp"
+            ];
 
-        const totalTime = 7;
-        let elapsedTime = 0;
+            const totalTime = 7;
+            let elapsedTime = 0;
 
-        // Start the animation
-        task1ProgressBar.classList.add('animate');
-        task2ProgressBar.classList.add('animate');
+            // Start the animation
+            task1ProgressBar.classList.add('animate');
+            task2ProgressBar.classList.add('animate');
 
-        // Start the timer
-        const interval = setInterval(() => {
-            elapsedTime++;
-            task1Timer.textContent = `${elapsedTime} с`;
-            task2Timer.textContent = `${elapsedTime} с`;
+            // Start the timer
+            const interval = setInterval(() => {
+                elapsedTime++;
+                task1Timer.textContent = `${elapsedTime} с`;
+                task2Timer.textContent = `${elapsedTime} с`;
 
-            if (elapsedTime >= totalTime) {
-                clearInterval(interval);
-                displayImages(task1ImageRow, task1Images);
-                displayImages(task2ImageRow, task2Images);
-            }
-        }, 1000);
-    }
+                if (elapsedTime >= totalTime) {
+                    clearInterval(interval);
+                    displayImages(task1ImageRow, task1Images);
+                    displayImages(task2ImageRow, task2Images);
+                }
+            }, 1000);
+        }
 
-    runTasks();
-</script>
+        runTasks();
+    </script>
 
 </body>
+
 </html>
